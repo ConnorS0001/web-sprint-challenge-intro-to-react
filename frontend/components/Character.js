@@ -5,7 +5,14 @@ function Character() { // ❗ Add the props
   // ❗ Create a "toggle" click handler to show or remove the homeworld
   return (
     <div>
-      {/* Use the same markup with the same attributes as in the mock */}
+      {/* Use the same markup with the same attributes as in the mock */
+      
+      //////////
+        
+      //////////
+      
+      
+      }
     </div>
   )
 }
