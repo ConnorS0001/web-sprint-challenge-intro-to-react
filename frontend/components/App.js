@@ -19,21 +19,18 @@ function App() {
     useEffect(() => {
       axios.get(urlPeople)
         .then(res => {
-          //console.log(res.data)
           setPeople(res.data)
-          //console.log(res.data[2])
         })
         .catch(err => {
           console.log(err)
         })
     }, [])
-  }
+  } 
 
   function getPlanets() {
     useEffect(() => {
       axios.get(urlPlanets)
         .then(res => {
-          //console.log(res.data)
           setPlanets(res.data)
         })
         .catch(err => {
@@ -45,7 +42,18 @@ function App() {
   getPeople()
   getPlanets()
 
-  
+  if (!people) return "Looking for people ..."
+  if (!planets) return "Looking for planets ..."
+
+  for (let a = 0; a < people.length; a++) {    
+    for (let b = 0; b < planets.length; b++)
+      if (planets[b].id === people[a].homeworld) {
+        people[a].homeworld = planets[b]        
+      }
+  }
+
+  console.log(people)
+
 
   ////////MY CODE////////////////
   
@@ -53,15 +61,22 @@ function App() {
     <div>
       <h2>Star Wars Characters</h2>
       <p>See the README of the project for instructions on completing this challenge</p>
+      
       {/* ❗ Map over the data in state, rendering a Character at each iteration */
+        
+        ////////MY CODE////////////////
+        people.map(person => {
+          return <Character 
+            key={person.id} 
+            characterName={person.name} 
+            characterHome={person.homeworld.name}
+          />
+        })
 
-      ////////MY CODE////////////////
-
-
-
-      ////////MY CODE////////////////  
+        ////////MY CODE////////////////  
 
       }
+      
     </div>
   )
 }
